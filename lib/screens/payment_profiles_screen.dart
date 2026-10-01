@@ -84,8 +84,10 @@ class _PaymentProfilesScreenState extends State<PaymentProfilesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.screenBg,
-      body: SafeArea(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.backdrop),
+        child: SafeArea(
         child: Column(
           children: [
             Padding(
@@ -97,7 +99,7 @@ class _PaymentProfilesScreenState extends State<PaymentProfilesScreen> {
                   const Expanded(
                     child: Text(
                       'Payment Profiles',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.ink),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
                     ),
                   ),
                   GlassIconButton(icon: Icons.add, onTap: _addProfile),
@@ -106,10 +108,10 @@ class _PaymentProfilesScreenState extends State<PaymentProfilesScreen> {
             ),
             Expanded(
               child: _loading
-                  ? const Center(child: CircularProgressIndicator(color: AppColors.brandGreen))
+                  ? const Center(child: CircularProgressIndicator(color: Colors.white))
                   : _profiles.isEmpty
                       ? const Center(
-                          child: Text('No saved payment profiles yet.', style: TextStyle(color: AppColors.inkMuted)),
+                          child: Text('No saved payment profiles yet.', style: TextStyle(color: Colors.white70)),
                         )
                       : ListView.builder(
                           padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
@@ -155,6 +157,7 @@ class _PaymentProfilesScreenState extends State<PaymentProfilesScreen> {
                         ),
             ),
           ],
+        ),
         ),
       ),
     );

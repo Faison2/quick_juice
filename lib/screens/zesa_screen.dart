@@ -10,6 +10,8 @@ import '../widgets/detail_dialog.dart';
 import '../widgets/glass_card.dart';
 import 'zesa_guide_screen.dart';
 
+const _zesaIconColor = AppColors.warning;
+
 class ZesaScreen extends StatefulWidget {
   final MeterMode initialMode;
 
@@ -157,118 +159,122 @@ class _ZesaScreenState extends State<ZesaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.screenBg,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  GlassIconButton(icon: Icons.arrow_back, onTap: () => Navigator.of(context).pop()),
-                  const SizedBox(width: 16),
-                  const Text(
-                    'Zesa',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.ink),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Center(
-                child: Container(
-                  width: 90,
-                  height: 90,
-                  decoration: const BoxDecoration(color: AppColors.brandGreenTint, shape: BoxShape.circle),
-                  child: const Icon(Icons.receipt_long, color: AppColors.brandGreen, size: 40),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.backdrop),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    GlassIconButton(icon: Icons.arrow_back, onTap: () => Navigator.of(context).pop()),
+                    const SizedBox(width: 16),
+                    const Text(
+                      'Zesa',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 24),
-              Center(
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: AppColors.cardWhite,
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: ZesaCurrency.values.map((c) {
-                      final selected = c == _currency;
-                      return GestureDetector(
-                        onTap: () => setState(() => _currency = c),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
-                          decoration: BoxDecoration(
-                            color: selected ? AppColors.brandGreen : Colors.transparent,
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: Text(
-                            c.label,
-                            style: TextStyle(
-                              color: selected ? Colors.white : AppColors.inkMuted,
-                              fontWeight: FontWeight.w700,
+                const SizedBox(height: 24),
+                const Center(
+                  child: GlassBadge(icon: Icons.receipt_long, iconColor: _zesaIconColor),
+                ),
+                const SizedBox(height: 24),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: AppColors.cardWhite,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: ZesaCurrency.values.map((c) {
+                        final selected = c == _currency;
+                        return GestureDetector(
+                          onTap: () => setState(() => _currency = c),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
+                            decoration: BoxDecoration(
+                              color: selected ? AppColors.navyMid : Colors.transparent,
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                            child: Text(
+                              c.label,
+                              style: TextStyle(
+                                color: selected ? Colors.white : AppColors.inkMuted,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }).toList(),
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 28),
-              _UnderlinedField(
-                label: _mode == MeterMode.split ? 'Main meter number' : 'Zesa meter number',
-                controller: _meterController,
-                keyboardType: TextInputType.number,
-                trailing: IconButton(
-                  icon: const Icon(Icons.bookmark_outline, color: AppColors.brandGreen),
-                  onPressed: _pickSavedMeter,
+                const SizedBox(height: 24),
+                GlassCard(
+                  child: Column(
+                    children: [
+                      _UnderlinedField(
+                        label: _mode == MeterMode.split ? 'Main meter number' : 'Zesa meter number',
+                        controller: _meterController,
+                        keyboardType: TextInputType.number,
+                        trailing: IconButton(
+                          icon: const Icon(Icons.bookmark_outline, color: AppColors.navyMid),
+                          onPressed: _pickSavedMeter,
+                        ),
+                        onChanged: () => setState(() {}),
+                      ),
+                      if (_mode == MeterMode.split) ...[
+                        const SizedBox(height: 18),
+                        _UnderlinedField(
+                          label: 'Split meter number',
+                          controller: _splitMeterController,
+                          keyboardType: TextInputType.number,
+                          onChanged: () => setState(() {}),
+                        ),
+                      ],
+                      const SizedBox(height: 18),
+                      _UnderlinedField(
+                        label: 'Mobile number',
+                        controller: _ecocashController,
+                        keyboardType: TextInputType.phone,
+                        trailing: IconButton(
+                          icon: const Icon(Icons.bookmark_outline, color: AppColors.navyMid),
+                          onPressed: _pickSavedProfile,
+                        ),
+                        onChanged: () => setState(() {}),
+                      ),
+                      const SizedBox(height: 18),
+                      _UnderlinedField(
+                        label: 'Amount',
+                        controller: _amountController,
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}'))],
+                        onChanged: () => setState(() {}),
+                      ),
+                    ],
+                  ),
                 ),
-                onChanged: () => setState(() {}),
-              ),
-              if (_mode == MeterMode.split) ...[
-                const SizedBox(height: 20),
-                _UnderlinedField(
-                  label: 'Split meter number',
-                  controller: _splitMeterController,
-                  keyboardType: TextInputType.number,
-                  onChanged: () => setState(() {}),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    onPressed: _canProceed ? _proceed : null,
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.navyMid,
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+                    ),
+                    child: const Text('Proceed', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                  ),
                 ),
               ],
-              const SizedBox(height: 20),
-              _UnderlinedField(
-                label: 'Mobile number',
-                controller: _ecocashController,
-                keyboardType: TextInputType.phone,
-                trailing: IconButton(
-                  icon: const Icon(Icons.bookmark_outline, color: AppColors.brandGreen),
-                  onPressed: _pickSavedProfile,
-                ),
-                onChanged: () => setState(() {}),
-              ),
-              const SizedBox(height: 20),
-              _UnderlinedField(
-                label: 'Amount',
-                controller: _amountController,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}'))],
-                onChanged: () => setState(() {}),
-              ),
-              const SizedBox(height: 40),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: _canProceed ? _proceed : null,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.brandGreen,
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-                  ),
-                  child: const Text('Proceed', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -306,8 +312,8 @@ class _UnderlinedField extends StatelessWidget {
             decoration: InputDecoration(
               labelText: label,
               labelStyle: const TextStyle(color: AppColors.inkMuted, fontSize: 13),
-              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: AppColors.brandGreen)),
-              focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: AppColors.brandGreen, width: 2)),
+              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: AppColors.rowBg)),
+              focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: AppColors.navyMid, width: 2)),
             ),
             onChanged: (_) => onChanged(),
           ),

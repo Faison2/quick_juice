@@ -42,8 +42,11 @@ class _RootShellState extends State<RootShell> {
 
     return Scaffold(
       extendBody: true,
-      backgroundColor: AppColors.screenBg,
-      body: IndexedStack(index: _index, children: pages),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.backdrop),
+        child: IndexedStack(index: _index, children: pages),
+      ),
       bottomNavigationBar: GlassBottomNav(
         items: _items,
         currentIndex: _index,

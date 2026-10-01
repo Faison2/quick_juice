@@ -99,7 +99,7 @@ class _ScanScreenState extends State<ScanScreen> {
           if (_controller != null && _controller!.value.isInitialized)
             CameraPreview(_controller!)
           else
-            Container(color: AppColors.brandGreenDark),
+            Container(decoration: const BoxDecoration(gradient: AppColors.backdrop)),
           SafeArea(
             child: Column(
               children: [

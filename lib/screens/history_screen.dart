@@ -7,7 +7,6 @@ import '../models/transaction_item.dart';
 import '../models/zesa_purchase.dart';
 import '../services/history_service.dart';
 import '../services/zesa_history_service.dart';
-import '../theme/app_theme.dart';
 import '../widgets/detail_dialog.dart';
 import '../widgets/glass_card.dart';
 import '../widgets/transaction_tile.dart';
@@ -147,7 +146,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               children: [
                 const Text(
                   'Transaction History',
-                  style: TextStyle(color: AppColors.ink, fontSize: 20, fontWeight: FontWeight.w700),
+                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 GlassIconButton(icon: Icons.tune, onTap: _toggleSort),
               ],
@@ -155,10 +154,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
           Expanded(
             child: _loading
-                ? const Center(child: CircularProgressIndicator(color: AppColors.brandGreen))
+                ? const Center(child: CircularProgressIndicator(color: Colors.white))
                 : _items.isEmpty
                     ? const Center(
-                        child: Text('No transactions yet.', style: TextStyle(color: AppColors.inkMuted)),
+                        child: Text('No transactions yet.', style: TextStyle(color: Colors.white70)),
                       )
                     : ListView.builder(
                         padding: const EdgeInsets.fromLTRB(20, 8, 20, 140),

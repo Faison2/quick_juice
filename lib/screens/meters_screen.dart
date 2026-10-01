@@ -108,8 +108,10 @@ class _MetersScreenState extends State<MetersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.screenBg,
-      body: SafeArea(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.backdrop),
+        child: SafeArea(
         child: Column(
           children: [
             Padding(
@@ -121,7 +123,7 @@ class _MetersScreenState extends State<MetersScreen> {
                   const Expanded(
                     child: Text(
                       'Meters',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.ink),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
                     ),
                   ),
                   GlassIconButton(icon: Icons.add, onTap: _addMeter),
@@ -130,10 +132,10 @@ class _MetersScreenState extends State<MetersScreen> {
             ),
             Expanded(
               child: _loading
-                  ? const Center(child: CircularProgressIndicator(color: AppColors.brandGreen))
+                  ? const Center(child: CircularProgressIndicator(color: Colors.white))
                   : _meters.isEmpty
                       ? const Center(
-                          child: Text('No saved meters yet.', style: TextStyle(color: AppColors.inkMuted)),
+                          child: Text('No saved meters yet.', style: TextStyle(color: Colors.white70)),
                         )
                       : ListView.builder(
                           padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
@@ -181,6 +183,7 @@ class _MetersScreenState extends State<MetersScreen> {
                         ),
             ),
           ],
+        ),
         ),
       ),
     );

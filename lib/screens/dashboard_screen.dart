@@ -69,20 +69,12 @@ class DashboardScreenState extends State<DashboardScreen> {
                 const Text(
                   'Smatbills',
                   style: TextStyle(
-                    color: AppColors.ink,
+                    color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    color: AppColors.brandGreenTint,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.person, color: AppColors.brandGreen),
-                ),
+                const GlassIconButton(icon: Icons.person_outline),
               ],
             ),
             const SizedBox(height: 20),
@@ -95,13 +87,15 @@ class DashboardScreenState extends State<DashboardScreen> {
                   _HeroCard(
                     title: 'Buy Zesa',
                     icon: Icons.bolt,
+                    color: AppColors.warning,
+                    colorDark: AppColors.warningDark,
                     onTap: () => _openZesa(),
                   ),
                   _HeroCard(
                     title: 'Scan Voucher',
                     icon: Icons.document_scanner_outlined,
-                    color: AppColors.netone,
-                    colorDark: AppColors.netoneDark,
+                    color: AppColors.blueMid,
+                    colorDark: AppColors.navyMid,
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => const ScanScreen()),
                     ),
@@ -109,8 +103,8 @@ class DashboardScreenState extends State<DashboardScreen> {
                   _HeroCard(
                     title: 'Zesa & Split Meter',
                     icon: Icons.bolt,
-                    color: AppColors.brandGreenDark,
-                    colorDark: AppColors.brandGreen,
+                    color: AppColors.warningDark,
+                    colorDark: AppColors.warning,
                     onTap: () => _openZesa(mode: MeterMode.split),
                   ),
                 ],
@@ -127,7 +121,7 @@ class DashboardScreenState extends State<DashboardScreen> {
                   width: active ? 18 : 6,
                   height: 6,
                   decoration: BoxDecoration(
-                    color: active ? AppColors.brandGreen : AppColors.inkMuted.withValues(alpha: 0.3),
+                    color: active ? Colors.white : Colors.white.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(3),
                   ),
                 );
@@ -136,15 +130,11 @@ class DashboardScreenState extends State<DashboardScreen> {
             const SizedBox(height: 24),
             const Text(
               'Airtime and bundles',
-              style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.ink, fontSize: 15),
+              style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 15),
             ),
             const SizedBox(height: 10),
-            Container(
+            GlassCard(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.brandGreenTint,
-                borderRadius: BorderRadius.circular(20),
-              ),
               child: Row(
                 children: Network.values.map((n) {
                   return Expanded(
@@ -159,7 +149,7 @@ class DashboardScreenState extends State<DashboardScreen> {
             const SizedBox(height: 24),
             const Text(
               'Profiles',
-              style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.ink, fontSize: 15),
+              style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 15),
             ),
             const SizedBox(height: 10),
             GlassCard(
@@ -208,8 +198,8 @@ class _HeroCard extends StatelessWidget {
   const _HeroCard({
     required this.title,
     required this.icon,
-    this.color = AppColors.brandGreen,
-    this.colorDark = AppColors.brandGreenDark,
+    this.color = AppColors.navyMid,
+    this.colorDark = AppColors.navyDeep,
     required this.onTap,
   });
 
@@ -278,7 +268,7 @@ class _NetworkTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: AppColors.cardWhite,
+          color: AppColors.rowBg,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(

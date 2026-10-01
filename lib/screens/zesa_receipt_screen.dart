@@ -88,23 +88,25 @@ class _ZesaReceiptScreenState extends State<ZesaReceiptScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.screenBg,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Add receipt details',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.ink),
-              ),
-              const SizedBox(height: 6),
-              const Text(
-                'Optional — copy these from the EcoCash SMS confirmation to keep a full record. You can skip this.',
-                style: TextStyle(color: AppColors.inkMuted, fontSize: 13),
-              ),
-              const SizedBox(height: 20),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.backdrop),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Add receipt details',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'Optional — copy these from the EcoCash SMS confirmation to keep a full record. You can skip this.',
+                  style: TextStyle(color: Colors.white70, fontSize: 13),
+                ),
+                const SizedBox(height: 20),
               GlassCard(
                 child: Column(
                   children: [
@@ -136,7 +138,7 @@ class _ZesaReceiptScreenState extends State<ZesaReceiptScreen> {
                 child: FilledButton(
                   onPressed: _saving ? null : _save,
                   style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.brandGreen,
+                    backgroundColor: AppColors.navyMid,
                     padding: const EdgeInsets.symmetric(vertical: 18),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
                   ),
@@ -153,10 +155,11 @@ class _ZesaReceiptScreenState extends State<ZesaReceiptScreen> {
               Center(
                 child: TextButton(
                   onPressed: _saving ? null : _save,
-                  child: const Text('Skip', style: TextStyle(color: AppColors.inkMuted)),
+                  child: const Text('Skip', style: TextStyle(color: Colors.white70)),
                 ),
               ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -179,7 +182,7 @@ class _ReceiptField extends StatelessWidget {
         labelText: label,
         labelStyle: const TextStyle(color: AppColors.inkMuted, fontSize: 13),
         enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: AppColors.rowBg)),
-        focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: AppColors.brandGreen, width: 2)),
+        focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: AppColors.navyMid, width: 2)),
       ),
     );
   }

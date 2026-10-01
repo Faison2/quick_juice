@@ -18,23 +18,18 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const Text(
               'Profile',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.ink),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
             ),
             const SizedBox(height: 20),
             Center(
               child: Column(
                 children: [
-                  Container(
-                    width: 84,
-                    height: 84,
-                    decoration: const BoxDecoration(
-                      color: AppColors.brandGreenTint,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.person, color: AppColors.brandGreen, size: 40),
-                  ),
+                  const GlassBadge(icon: Icons.person, iconColor: AppColors.navyMid, size: 84),
                   const SizedBox(height: 12),
-                  const Text('Guest', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                  const Text(
+                    'Guest',
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: Colors.white),
+                  ),
                 ],
               ),
             ),
@@ -44,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.receipt_long_outlined, color: AppColors.brandGreen),
+                    leading: const Icon(Icons.receipt_long_outlined, color: AppColors.navyMid),
                     title: const Text('Transaction History'),
                     trailing: const Icon(Icons.chevron_right, color: AppColors.inkMuted),
                     onTap: () => Navigator.of(context).push(
@@ -53,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const Divider(height: 1),
                   ListTile(
-                    leading: const Icon(Icons.settings_outlined, color: AppColors.brandGreen),
+                    leading: const Icon(Icons.settings_outlined, color: AppColors.navyMid),
                     title: const Text('Settings'),
                     trailing: const Icon(Icons.chevron_right, color: AppColors.inkMuted),
                     onTap: () => Navigator.of(context).push(
@@ -67,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
             const Center(
               child: Text(
                 'Smat Bills v1.0.0',
-                style: TextStyle(color: AppColors.inkMuted, fontSize: 12),
+                style: TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ),
           ],

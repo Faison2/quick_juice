@@ -11,7 +11,7 @@ Future<T?> showAppDialog<T>({
   required Widget child,
   String? primaryLabel,
   VoidCallback? onPrimary,
-  Color primaryColor = AppColors.brandGreen,
+  Color primaryColor = AppColors.navyMid,
   String? secondaryLabel,
   VoidCallback? onSecondary,
   Color secondaryColor = AppColors.dangerRed,
@@ -33,11 +33,18 @@ Future<T?> showAppDialog<T>({
                 child: Container(
                   width: 68,
                   height: 68,
-                  decoration: const BoxDecoration(
-                    color: AppColors.brandGreenTint,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.navyDeep.withValues(alpha: 0.25),
+                        blurRadius: 16,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
                   ),
-                  child: Icon(topIcon, color: AppColors.brandGreen, size: 32),
+                  child: Icon(topIcon, color: AppColors.navyMid, size: 32),
                 ),
               ),
             Container(
@@ -71,12 +78,12 @@ Future<T?> showAppDialog<T>({
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: AppColors.brandGreen),
+                              border: Border.all(color: AppColors.navyMid),
                             ),
                             child: const Icon(
                               Icons.close,
                               size: 16,
-                              color: AppColors.brandGreen,
+                              color: AppColors.navyMid,
                             ),
                           ),
                         ),
@@ -196,7 +203,7 @@ class OptionRow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.brandGreen.withValues(alpha: 0.4)),
+            border: Border.all(color: AppColors.navyMid.withValues(alpha: 0.4)),
           ),
           child: Row(
             children: [
@@ -204,7 +211,7 @@ class OptionRow extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: const BoxDecoration(
-                  color: AppColors.brandGreen,
+                  color: AppColors.navyMid,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, color: Colors.white, size: 18),
@@ -257,7 +264,7 @@ class ProfileRow extends StatelessWidget {
                 children: [
                   Text(
                     brand,
-                    style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.brandGreen),
+                    style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.navyMid),
                   ),
                   if (subtitle != null)
                     Text(subtitle!, style: const TextStyle(color: AppColors.inkMuted, fontSize: 12)),

@@ -106,101 +106,104 @@ class _ZesaGuideScreenState extends State<ZesaGuideScreen> {
   Widget build(BuildContext context) {
     final steps = _showAltPath ? _altSteps : _primarySteps;
     return Scaffold(
-      backgroundColor: AppColors.screenBg,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-              child: Row(
-                children: [
-                  GlassIconButton(icon: Icons.arrow_back, onTap: () => Navigator.of(context).pop()),
-                  const SizedBox(width: 16),
-                  const Expanded(
-                    child: Text(
-                      'Follow these steps',
-                      style: TextStyle(color: AppColors.ink, fontSize: 19, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.backdrop),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+                child: Row(
                   children: [
-                    GlassCard(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (int i = 0; i < steps.length; i++) ...[
-                            _StepRow(
-                              number: i + 1,
-                              step: steps[i],
-                              onCopy: steps[i].copyValue == null
-                                  ? null
-                                  : () => _copy(steps[i].copyValue!, steps[i].copyLabel!),
-                            ),
-                            if (i != steps.length - 1) const Divider(height: 20),
-                          ],
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextButton(
-                      onPressed: () => setState(() => _showAltPath = !_showAltPath),
+                    GlassIconButton(icon: Icons.arrow_back, onTap: () => Navigator.of(context).pop()),
+                    const SizedBox(width: 16),
+                    const Expanded(
                       child: Text(
-                        _showAltPath
-                            ? 'Use "Pay ZESA" option instead'
-                            : 'Don\'t see "Pay ZESA"? Try Biller Code instead',
-                        style: const TextStyle(color: AppColors.inkMuted),
+                        'Follow these steps',
+                        style: TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.w700),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: _dial,
-                        icon: const Icon(Icons.call, color: AppColors.brandGreen),
-                        label: const Text('Dial *151#', style: TextStyle(color: AppColors.brandGreen)),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          side: const BorderSide(color: AppColors.brandGreen),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 14),
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: _dialed ? _continueToReceipt : null,
-                        style: FilledButton.styleFrom(
-                          backgroundColor: AppColors.brandGreen,
-                          padding: const EdgeInsets.symmetric(vertical: 18),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-                        ),
-                        child: const Text(
-                          'I completed the purchase',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ),
-                    if (!_dialed) ...[
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Dial *151# first, then come back here once EcoCash confirms your token.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: AppColors.inkMuted, fontSize: 12),
-                      ),
-                    ],
                   ],
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GlassCard(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (int i = 0; i < steps.length; i++) ...[
+                              _StepRow(
+                                number: i + 1,
+                                step: steps[i],
+                                onCopy: steps[i].copyValue == null
+                                    ? null
+                                    : () => _copy(steps[i].copyValue!, steps[i].copyLabel!),
+                              ),
+                              if (i != steps.length - 1) const Divider(height: 20),
+                            ],
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: () => setState(() => _showAltPath = !_showAltPath),
+                        child: Text(
+                          _showAltPath
+                              ? 'Use "Pay ZESA" option instead'
+                              : 'Don\'t see "Pay ZESA"? Try Biller Code instead',
+                          style: const TextStyle(color: Colors.white70),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: _dial,
+                          icon: const Icon(Icons.call, color: Colors.white),
+                          label: const Text('Dial *151#', style: TextStyle(color: Colors.white)),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            side: const BorderSide(color: Colors.white54),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          onPressed: _dialed ? _continueToReceipt : null,
+                          style: FilledButton.styleFrom(
+                            backgroundColor: AppColors.navyMid,
+                            padding: const EdgeInsets.symmetric(vertical: 18),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+                          ),
+                          child: const Text(
+                            'I completed the purchase',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                      if (!_dialed) ...[
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Dial *151# first, then come back here once EcoCash confirms your token.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white60, fontSize: 12),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -223,7 +226,7 @@ class _StepRow extends StatelessWidget {
           width: 26,
           height: 26,
           alignment: Alignment.center,
-          decoration: const BoxDecoration(color: AppColors.brandGreen, shape: BoxShape.circle),
+          decoration: const BoxDecoration(color: AppColors.navyMid, shape: BoxShape.circle),
           child: Text(
             '$number',
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 12),

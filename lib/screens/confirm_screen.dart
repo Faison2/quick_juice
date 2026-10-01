@@ -96,8 +96,10 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.screenBg,
-      body: SafeArea(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppColors.backdrop),
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -113,7 +115,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     const Text(
                       'Confirm Recharge',
                       style: TextStyle(
-                        color: AppColors.ink,
+                        color: Colors.white,
                         fontSize: 19,
                         fontWeight: FontWeight.w700,
                       ),
@@ -131,7 +133,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                           margin: const EdgeInsets.only(right: 12),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           decoration: BoxDecoration(
-                            color: selected ? AppColors.cardWhite : AppColors.rowBg,
+                            color: selected ? AppColors.cardWhite : Colors.white24,
                             borderRadius: BorderRadius.circular(18),
                           ),
                           child: Column(
@@ -144,7 +146,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                                   fontWeight: FontWeight.w700,
                                   color: selected
                                       ? AppColors.ink
-                                      : AppColors.inkMuted,
+                                      : Colors.white,
                                 ),
                               ),
                             ],
@@ -256,6 +258,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
             ),
           ),
         ),
+      ),
     );
   }
 }
