@@ -94,7 +94,7 @@ class DashboardScreenState extends State<DashboardScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Smatbills',
+                  'JuiceUp',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,

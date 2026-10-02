@@ -12,7 +12,7 @@ class JucieUpApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Smat Bills',
+      title: 'JuiceUp',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       home: const RootShell(),

@@ -1,4 +1,4 @@
-package com.example.jucie_up
+package com.smatbills.juiceup
 
 import android.content.Intent
 import android.net.Uri
