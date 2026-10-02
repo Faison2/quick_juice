@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
 import 'network.dart';
 import 'recharge_record.dart';
-import 'zesa_purchase.dart';
 
-enum TransactionSource { airtime, zesa }
+enum TransactionSource { airtime }
 
 class TransactionItem {
   final TransactionSource source;
@@ -16,7 +14,6 @@ class TransactionItem {
   final String? tokenLabel;
   final DateTime date;
   final RechargeRecord? recharge;
-  final ZesaPurchase? zesa;
 
   TransactionItem({
     required this.source,
@@ -28,7 +25,6 @@ class TransactionItem {
     this.tokenLabel,
     required this.date,
     this.recharge,
-    this.zesa,
   });
 
   factory TransactionItem.fromRecharge(RechargeRecord record) {
@@ -45,28 +41,8 @@ class TransactionItem {
     );
   }
 
-  factory TransactionItem.fromZesa(ZesaPurchase purchase) {
-    return TransactionItem(
-      source: TransactionSource.zesa,
-      title: 'Zesa',
-      logoIcon: Icons.bolt_outlined,
-      logoColor: AppColors.warning,
-      logoColorDark: AppColors.warningDark,
-      amountLabel: '${purchase.currency.label} ${purchase.amount}',
-      tokenLabel: purchase.token != null ? 'Token: ${purchase.token}' : null,
-      date: purchase.purchasedAt,
-      zesa: purchase,
-    );
-  }
-
-  static List<TransactionItem> merge(
-    List<RechargeRecord> recharges,
-    List<ZesaPurchase> purchases,
-  ) {
-    final items = [
-      ...recharges.map(TransactionItem.fromRecharge),
-      ...purchases.map(TransactionItem.fromZesa),
-    ];
+  static List<TransactionItem> merge(List<RechargeRecord> recharges) {
+    final items = recharges.map(TransactionItem.fromRecharge).toList();
     items.sort((a, b) => b.date.compareTo(a.date));
     return items;
   }

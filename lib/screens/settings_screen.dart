@@ -181,7 +181,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Text('About', style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.ink)),
                   SizedBox(height: 8),
                   Text(
-                    'Smat Bills scans a prepaid voucher and dials the Econet (*121*PIN#), NetOne (*133*PIN#), or Telecel (*123*PIN#) recharge code for you, and guides you through buying Zesa tokens via EcoCash. Android only — auto-dial requires the Phone permission.',
+                    'Smat Bills scans a prepaid voucher and dials the Econet (*121*PIN#), NetOne (*133*PIN#), or Telecel (*123*PIN#) recharge code for you. Android only — auto-dial requires the Phone permission.',
                     style: TextStyle(color: AppColors.inkMuted, fontSize: 13, height: 1.4),
                   ),
                 ],
